@@ -1,0 +1,8 @@
+rawMaterialCode,rawMaterialName,vendorName,quantity,unit,price,addedDate
+RM00001,Packaging Material,ABC Supplies,50,piece,450.50,2025-01-20
+RM00001,Packaging Material,XYZ Manufacturing,100,piece,425.00,2025-01-15
+,Sugar,ABC Supplies,25,kg,520.00,2024-12-28
+,Wheat Flour,Global Traders,20,kg,510.50,2024-12-15
+RM00003,Tech Component,Tech Solutions,1,kg,750.00,2024-11-30
+,Salt,Star Imports,500,kg,35.00,2024-11-10
+RM00005,Spices,ABC Supplies,10,kg,250.75,2024-10-25
