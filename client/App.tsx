@@ -33,6 +33,7 @@ const LabourManagement = lazy(() => import("./pages/LabourManagement"));
 const CreateLabour = lazy(() => import("./pages/CreateLabour"));
 const CostingAnalysis = lazy(() => import("./pages/CostingAnalysis"));
 const OpCostManagement = lazy(() => import("./pages/OpCostManagement"));
+const LoginLogs = lazy(() => import("./pages/LoginLogs"));
 
 // Loading fallback component
 const PageLoader = () => (
@@ -232,6 +233,14 @@ const App = () => (
               element={
                 <ProtectedRoute requiredPermission="opcost_view">
                   <OpCostManagement />
+                </ProtectedRoute>
+              }
+            />
+              <Route
+              path="/login-logs"
+              element={
+                <ProtectedRoute requiredPermission="admin">
+                  <LoginLogs />
                 </ProtectedRoute>
               }
             />

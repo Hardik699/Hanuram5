@@ -15,6 +15,7 @@ import { errorHandler, Logger } from "./middleware/errorHandler";
 import multer from "multer";
 import { handleDemo, handlePopulateSampleData } from "./routes/demo";
 import { handleLogin } from "./routes/login";
+import loginLogsRouter from "./routes/login-logs";
 import { handleDBStatus } from "./routes/db-status";
 import { handleBackupStart, handleBackupProgress } from "./routes/backup";
 import {
@@ -244,6 +245,7 @@ export async function createServer() {
 
   // Authentication routes
   app.post("/api/login", handleLogin);
+  app.use("/api/login-logs", loginLogsRouter);
   app.get("/api/db-status", handleDBStatus);
   app.post("/api/backup", handleBackupStart);
   app.get("/api/backup/progress/:jobId", handleBackupProgress);

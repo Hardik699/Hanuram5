@@ -1350,20 +1350,20 @@ export default function RecipeDetail() {
                       </tr>
                     ))}
                     {/* Footer row: Total Qty + Total RM Cost */}
-                    <tr className="bg-blue-100 dark:bg-blue-900/30 border-t-2 border-blue-300 dark:border-blue-700 hover:bg-blue-200 dark:hover:bg-blue-900/50 transition-colors">
-                      <td className="py-2.5 px-4 text-xs font-bold text-blue-700 dark:text-blue-300 uppercase tracking-wider">
+                    <tr className="bg-slate-100 dark:bg-slate-800/50 border-t-2 border-slate-300 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors">
+                      <td className="py-2.5 px-4 text-xs font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider">
                         Total
                       </td>
-                      <td className="py-2.5 px-4 font-bold text-blue-800 dark:text-blue-200 text-sm">
+                      <td className="py-2.5 px-4 font-bold text-slate-800 dark:text-slate-200 text-sm">
                         {recipe.items?.reduce((sum, item) => sum + (item.quantity || 0), 0).toFixed(3)}
                       </td>
-                      <td className="py-2.5 px-4 text-blue-700 dark:text-blue-300 text-sm font-semibold">
+                      <td className="py-2.5 px-4 text-slate-700 dark:text-slate-300 text-sm font-semibold">
                         {recipe.unitName || "—"}
                       </td>
-                      <td className="py-2.5 px-4 text-right text-blue-400 text-xs font-medium">
+                      <td className="py-2.5 px-4 text-right text-slate-400 text-xs font-medium">
                         —
                       </td>
-                      <td className="py-2.5 px-4 text-right font-bold text-blue-700 dark:text-blue-300 text-sm">
+                      <td className="py-2.5 px-4 text-right font-bold text-slate-700 dark:text-slate-300 text-sm">
                         ₹{totalRMCost.toFixed(2)}
                       </td>
                     </tr>
@@ -1373,12 +1373,12 @@ export default function RecipeDetail() {
 
               {/* Summary */}
               <div className="flex justify-end gap-4 mt-4 pt-4 border-t border-slate-200 dark:border-slate-700">
-                <div className="text-right px-6 py-4 rounded-xl bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-700 shadow-sm hover:shadow-md hover:bg-blue-600 hover:border-blue-600 transition-all duration-200 cursor-default group min-w-[180px]">
-                  <p className="text-xs font-bold text-blue-500 dark:text-blue-400 group-hover:text-blue-100 uppercase tracking-widest mb-1">
+                <div className="text-right px-6 py-4 rounded-xl bg-blue-100 dark:bg-blue-900/20 border border-blue-300 dark:border-blue-700 shadow-sm hover:shadow-md hover:bg-blue-600 hover:border-blue-600 transition-all duration-200 cursor-default group min-w-[180px]">
+                  <p className="text-xs font-bold text-blue-600 dark:text-blue-400 group-hover:text-blue-100 uppercase tracking-widest mb-1">
                     Price Per {recipe.unitName || "Unit"} (Yield)
                   </p>
                   <p className="text-2xl font-extrabold text-blue-800 dark:text-blue-200 group-hover:text-white leading-tight">
-                    ₹{pricePerUnit.toFixed(2)}<span className="text-base font-semibold text-blue-400 dark:text-blue-400 group-hover:text-blue-200 ml-0.5">/{recipe.unitName || "unit"}</span>
+                    ₹{pricePerUnit.toFixed(2)}<span className="text-base font-semibold text-blue-600 dark:text-blue-400 group-hover:text-blue-200 ml-0.5">/{recipe.unitName || "unit"}</span>
                   </p>
                 </div>
               </div>

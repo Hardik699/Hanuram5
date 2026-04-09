@@ -122,15 +122,15 @@ export function CostingCalculatorForm({
           if (data.success && data.data) {
             const recipe = data.data;
             // Load saved labour costs from recipe, or use props as fallback
-            if (recipe.productionLabourCostPerKg !== undefined && recipe.productionLabourCostPerKg > 0) {
+            if (recipe.productionLabourCostPerKg !== undefined && recipe.productionLabourCostPerKg !== null) {
               setLabourCostPerKg(recipe.productionLabourCostPerKg);
-            } else if (productionLabourCostPerKg > 0) {
+            } else if (productionLabourCostPerKg !== undefined && productionLabourCostPerKg !== null) {
               setLabourCostPerKg(productionLabourCostPerKg);
             }
             
-            if (recipe.packingLabourCostPerKg !== undefined && recipe.packingLabourCostPerKg > 0) {
+            if (recipe.packingLabourCostPerKg !== undefined && recipe.packingLabourCostPerKg !== null) {
               setPackingLabourCostPerKgState(recipe.packingLabourCostPerKg);
-            } else if (packingLabourCostPerKg > 0) {
+            } else if (packingLabourCostPerKg !== undefined && packingLabourCostPerKg !== null) {
               setPackingLabourCostPerKgState(packingLabourCostPerKg);
             }
           }
@@ -146,16 +146,16 @@ export function CostingCalculatorForm({
 
   // Sync labour cost when prop changes (only if not already loaded from DB)
   useEffect(() => {
-    // Only update if the prop value is different and greater than current state
-    if (productionLabourCostPerKg > 0 && productionLabourCostPerKg !== labourCostPerKg) {
+    // Only update if the prop value is different from current state
+    if (productionLabourCostPerKg !== undefined && productionLabourCostPerKg !== null && productionLabourCostPerKg !== labourCostPerKg) {
       setLabourCostPerKg(productionLabourCostPerKg);
     }
   }, [productionLabourCostPerKg]);
 
   // Sync packing labour cost when prop changes (only if not already loaded from DB)
   useEffect(() => {
-    // Only update if the prop value is different and greater than current state
-    if (packingLabourCostPerKg > 0 && packingLabourCostPerKg !== packingLabourCostPerKgState) {
+    // Only update if the prop value is different from current state
+    if (packingLabourCostPerKg !== undefined && packingLabourCostPerKg !== null && packingLabourCostPerKg !== packingLabourCostPerKgState) {
       setPackingLabourCostPerKgState(packingLabourCostPerKg);
     }
   }, [packingLabourCostPerKg]);
@@ -584,7 +584,7 @@ export function CostingCalculatorForm({
                   ) : (
                     <>
                       <Save className="w-4 h-4" />
-                      <span>Save Costs</span>
+                      <span>Save Other Costs</span>
                     </>
                   )}
                 </button>
@@ -595,10 +595,13 @@ export function CostingCalculatorForm({
               <h3 className="text-base font-bold text-slate-800 mb-4">
                 📊 Complete Cost Breakdown (Per Kg)
               </h3>
+              
+              {/* Price Per Kg (Yield) Highlight */}
+              
               <div className="space-y-3">
                 <div className="pb-3 border-b border-indigo-200">
                   <div className="flex justify-between items-center mb-1">
-                    <span className="text-sm font-medium text-slate-700">1. Raw Material Cost / KG</span>
+                    <span className="text-sm font-medium text-slate-700">1. Price Per Kg (Yield)</span>
                     <span className="text-base font-bold text-slate-800">₹{rmCostPerKg.toFixed(2)}</span>
                   </div>
                   {batchSize > 0 && (

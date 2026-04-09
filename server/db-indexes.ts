@@ -64,6 +64,14 @@ export async function createDatabaseIndexes(db: Db): Promise<void> {
     await db.collection("packaging_costs").createIndex({ recipeId: 1 }, { unique: true });
     console.log("✅ Packaging costs indexes created");
 
+    // Login logs indexes
+    await db.collection("login_logs").createIndex({ loginTime: -1 });
+    await db.collection("login_logs").createIndex({ username: 1 });
+    await db.collection("login_logs").createIndex({ ipAddress: 1 });
+    await db.collection("login_logs").createIndex({ status: 1 });
+    await db.collection("login_logs").createIndex({ username: 1, loginTime: -1 });
+    console.log("✅ Login logs indexes created");
+
     console.log("✅ All database indexes created successfully!");
   } catch (error) {
     console.error("❌ Error creating database indexes:", error);

@@ -806,6 +806,40 @@ export default function RMDetail() {
     }
   };
 
+  const handleDeleteVendorPrice = async (vendorPriceId: string) => {
+    if (!id) return;
+
+    if (!window.confirm("Are you sure you want to delete this vendor price?")) {
+      return;
+    }
+
+    try {
+      const response = await fetch(`/api/raw-materials/${id}/vendor-prices/${vendorPriceId}`, {
+        method: "DELETE",
+        headers: { "Content-Type": "application/json" },
+      });
+
+      if (!response.ok) {
+        throw new Error(`Delete failed: HTTP ${response.status}`);
+      }
+
+      const data = await response.json();
+      if (data.success) {
+        setMessage("Vendor price deleted successfully");
+        setMessageType("success");
+        // Refresh the raw material data
+        await updateRawMaterialOnly();
+      } else {
+        setMessage(data.message || "Failed to delete vendor price");
+        setMessageType("error");
+      }
+    } catch (error) {
+      console.error("Error deleting vendor price:", error);
+      setMessage("Error deleting vendor price");
+      setMessageType("error");
+    }
+  };
+
   const formatUnit = (u?: string | null) => {
     if (!u) return null;
     const s = u.toLowerCase().trim();
@@ -946,13 +980,14 @@ export default function RMDetail() {
               </div>
             ) : (
               <div className="overflow-x-auto">
-                <table className="w-full min-w-[700px]">
+                <table className="w-full">
                   <thead className="prof-table-head">
                     <tr>
                       <th className="prof-table-head-cell">Purchase Date</th>
                       <th className="prof-table-head-cell">Quantity</th>
                       <th className="prof-table-head-cell">Price</th>
                       <th className="prof-table-head-cell">Total Amount</th>
+                      <th className="prof-table-head-cell text-center">Action</th>
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-slate-200 dark:divide-slate-700">
@@ -983,6 +1018,16 @@ export default function RMDetail() {
                           </td>
                           <td className="prof-table-cell-bold text-blue-600 dark:text-blue-400">
                             ₹{totalAmount.toFixed(2)}
+                          </td>
+                          <td className="prof-table-cell">
+                            <button
+                              onClick={() => handleDeleteVendorPrice(purchase._id)}
+                              className="inline-flex items-center justify-center gap-1 px-2 py-1 bg-red-50 dark:bg-red-900/20 text-red-600 dark:text-red-400 hover:bg-red-100 dark:hover:bg-red-900/40 rounded text-xs font-medium transition-colors"
+                              title="Delete this vendor price"
+                            >
+                              <Trash2 className="w-3 h-3" />
+                              Delete
+                            </button>
                           </td>
                         </tr>
                       );

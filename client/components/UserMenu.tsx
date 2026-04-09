@@ -1,9 +1,11 @@
 import { useState } from "react";
 import { useAuth } from "@/hooks/useAuth";
-import { LogOut, User } from "lucide-react";
+import { useNavigate } from "react-router-dom";
+import { LogOut, User, History } from "lucide-react";
 
 export function UserMenu() {
   const { user, logout } = useAuth();
+  const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
 
   if (!user) return null;
@@ -42,6 +44,17 @@ export function UserMenu() {
 
           {/* Menu Items */}
           <div className="p-2">
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                navigate("/login-logs");
+                setIsOpen(false);
+              }}
+              className="w-full flex items-center gap-3 px-3 py-2.5 text-sm text-slate-700 hover:bg-slate-50 rounded-lg transition-colors"
+            >
+              <History size={16} className="flex-shrink-0" />
+              <span>Login Logs</span>
+            </button>
             <button
               onClick={(e) => {
                 e.stopPropagation();

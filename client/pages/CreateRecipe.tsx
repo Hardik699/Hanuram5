@@ -305,6 +305,14 @@ export default function CreateRecipe() {
             moisturePercentage: recipe.moisturePercentage?.toString() || "",
           });
 
+          // Load labour costs from recipe
+          if (recipe.productionLabourCostPerKg !== undefined) {
+            setProductionLabourCostPerKg(recipe.productionLabourCostPerKg);
+          }
+          if (recipe.packingLabourCostPerKg !== undefined) {
+            setPackingLabourCostPerKg(recipe.packingLabourCostPerKg);
+          }
+
           // Fetch recipe items separately
           try {
             const itemsResponse = await fetch(`/api/recipes/${recipeId}/items`);
